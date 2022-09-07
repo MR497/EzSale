@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "550285944415",
+    "project_id": "ezsale-95854",
+    "storage_bucket": "ezsale-95854.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550285944415:android:b438b67a5eda00d9765dea",
+        "android_client_info": {
+          "package_name": "com.example.ezsale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550285944415-s9jc7rlkonap337698d8g0vubh9sn4jd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASdy6DojfIEUL7Vt7A5Ii0oj3HVmwbAn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550285944415-s9jc7rlkonap337698d8g0vubh9sn4jd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

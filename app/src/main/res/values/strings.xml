@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EzSale</string>
+    <string name="create_account">Create Account</string>
+    <string name="first_name">First Name</string>
+    <string name="username">Username</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
