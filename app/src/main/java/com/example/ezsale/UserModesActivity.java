@@ -31,12 +31,6 @@ public class UserModesActivity extends AppCompatActivity {
         String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         db = FirebaseFirestore.getInstance();
 
-//        getUserData(db, Objects.requireNonNull(user).getUid(), user1 -> {
-//            String userFirstAndLastName = "Welcome " + user1.getUserName();
-//            ((TextView) findViewById(R.id.current_user_welcome)).setText(userFirstAndLastName);
-//
-//        });
-
         getUserData(currentUser);
 
         Button logoutButton = findViewById(R.id.logout_button);
@@ -44,10 +38,10 @@ public class UserModesActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(UserModesActivity.this, "Logged Out!", Toast.LENGTH_LONG).show();
             startActivity(new Intent(UserModesActivity.this, MainActivity.class));
+            finish();
         });
 
     }
-
 
     private void getUserData(String userId) {
         DocumentReference docRef = db.collection("users").document(userId);

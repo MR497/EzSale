@@ -6,4 +6,7 @@
     <string name="e_mail">E-Mail</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="seller_mode">Seller Mode</string>
 </resources>

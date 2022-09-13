@@ -69,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Log.d("registered", "registration to firebase complete");
                     Toast.makeText(SignUpActivity.this, "Registration Complete!", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(SignUpActivity.this, UserModesActivity.class));
+                    finish();
                 }
                 else {
                     Toast.makeText(SignUpActivity.this, "Registration FAILED - Email in use", Toast.LENGTH_LONG).show();
