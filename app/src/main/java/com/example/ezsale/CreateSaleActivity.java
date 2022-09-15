@@ -50,22 +50,39 @@ public class CreateSaleActivity extends AppCompatActivity {
     private void createSale(String itemName, String itemDesc, String itemCost, String zipcode) {
         String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-        HashMap<String, String> salesMap = new HashMap<>();
-        salesMap.put("author", currentUser);
-        salesMap.put("name", itemName);
-        salesMap.put("description", itemDesc);
-        salesMap.put("cost", itemCost);
-        salesMap.put("zipcode", zipcode);
+        DocumentReference docRef = db.collection("users").document(currentUser);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    Log.d("userInformation", "DocumentSnapshot data: " + document.getData());
+                    String userName = (String) Objects.requireNonNull(document.getData()).get("userName");
 
-        db.collection("Items Being Sold").document(currentUser).collection("User's Listings").document(itemName)
-                .set(salesMap).addOnCompleteListener(task -> {
-           if(task.isSuccessful()){
-               Toast.makeText(CreateSaleActivity.this, "Item Put Up For Sale!", Toast.LENGTH_LONG).show();
-               startActivity(new Intent(CreateSaleActivity.this, SellerMode.class));
-           }
-           else {
-               Toast.makeText(CreateSaleActivity.this, "Oops an error has occurred! Please try again", Toast.LENGTH_LONG).show();
-           }
+                    HashMap<String, String> salesMap = new HashMap<>();
+                    salesMap.put("author", userName);
+                    salesMap.put("name", itemName);
+                    salesMap.put("description", itemDesc);
+                    salesMap.put("cost", itemCost);
+                    salesMap.put("zipcode", zipcode);
+
+                    db.collection("Items Being Sold").document(currentUser).collection(userName+"'s Listings").document(itemName)
+                            .set(salesMap).addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    Toast.makeText(CreateSaleActivity.this, "Item Put Up For Sale!", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(CreateSaleActivity.this, SellerMode.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(CreateSaleActivity.this, "Oops an error has occurred! Please try again", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                }
+                else {
+                    Log.d("userInformation", "No such document");
+                }
+            }
+            else {
+                Log.d("userInformation", "get failed with ", task.getException());
+            }
         });
     }
 }
