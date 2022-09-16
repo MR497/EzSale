@@ -9,4 +9,5 @@
     <string name="buy">Buy</string>
     <string name="sell">Sell</string>
     <string name="seller_mode">Seller Mode</string>
+    <string name="amount_s">Amount: $%s</string>
 </resources>
