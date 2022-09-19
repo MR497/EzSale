@@ -40,7 +40,6 @@ public class SellerMode extends AppCompatActivity {
         sellerListings = findViewById(R.id.seller_listings);
 
         Query query = db.collection("Items Being Sold").document(currentUser).collection("User's Listings");
-
         FirestoreRecyclerOptions<SellerListingsModel> options = new FirestoreRecyclerOptions.Builder<SellerListingsModel>()
                 .setQuery(query, SellerListingsModel.class)
                 .build();
@@ -59,6 +58,13 @@ public class SellerMode extends AppCompatActivity {
                 holder.itemDesc.setText(model.getDescription());
                 holder.itemCost.setText(model.getCost());
                 holder.zipcode.setText(model.getZipcode());
+                int pos = holder.getAbsoluteAdapterPosition();
+                holder.deletePost.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getSnapshots().getSnapshot(pos).getReference().delete();
+                    }
+                });
             }
         };
 
@@ -71,6 +77,7 @@ public class SellerMode extends AppCompatActivity {
     private class SellerListingViewHolder extends RecyclerView.ViewHolder{
 
         private TextView itemName, itemDesc, itemCost, zipcode;
+        private Button deletePost;
 
         public SellerListingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +86,7 @@ public class SellerMode extends AppCompatActivity {
             itemDesc = itemView.findViewById(R.id.description_placeholder);
             itemCost = itemView.findViewById(R.id.amount_placeholder);
             zipcode = itemView.findViewById(R.id.zip_placeholder);
+            deletePost = itemView.findViewById(R.id.delete_post_button);
         }
     }
 
