@@ -163,10 +163,10 @@
                 tools:ignore="TextContrastCheck" />
 
             <Button
-                android:id="@+id/edit_post_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
+                android:id="@+id/sold_post_button"
+                android:layout_width="112dp"
+                android:layout_height="56dp"
+                android:text="Mark As Sold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.946"
