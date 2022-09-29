@@ -65,7 +65,7 @@ public class CreateSaleActivity extends AppCompatActivity {
                     salesMap.put("cost", itemCost);
                     salesMap.put("zipcode", zipcode);
 
-                    db.collection("Items Being Sold").document(currentUser).collection("User's Listings").document(itemName)
+                    db.collection("Items Being Sold").document(currentUser).collection("User's Listings").document()
                             .set(salesMap).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     Toast.makeText(CreateSaleActivity.this, "Item Put Up For Sale!", Toast.LENGTH_LONG).show();

@@ -43,6 +43,9 @@ public class SellerMode extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Button seeSoldItems = findViewById(R.id.see_sold_items_button);
+        seeSoldItems.setOnClickListener(view -> startActivity(new Intent(SellerMode.this, SoldItemsActivity.class)));
+
         Button sellNewItem = findViewById(R.id.seller_mode_sell_button);
         sellNewItem.setOnClickListener(view -> startActivity(new Intent(SellerMode.this, CreateSaleActivity.class)));
 
@@ -96,14 +99,29 @@ public class SellerMode extends AppCompatActivity {
                 holder.soldPost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String soldItemName = (String) getSnapshots().getSnapshot(pos).getData().get("name");
-                        String soldItemDesc = (String) getSnapshots().getSnapshot(pos).getData().get("description");
-                        String soldItemCost = (String) getSnapshots().getSnapshot(pos).getData().get("cost");
-                        String soldItemZipcode = (String) getSnapshots().getSnapshot(pos).getData().get("zipcode");
+                        AlertDialog dialog = new AlertDialog.Builder(SellerMode.this)
+                                .setTitle("Confirmation")
+                                .setMessage("Mark this item as sold?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        String soldItemName = (String) getSnapshots().getSnapshot(pos).getData().get("name");
+                                        String soldItemDesc = (String) getSnapshots().getSnapshot(pos).getData().get("description");
+                                        String soldItemCost = (String) getSnapshots().getSnapshot(pos).getData().get("cost");
+                                        String soldItemZipcode = (String) getSnapshots().getSnapshot(pos).getData().get("zipcode");
 
-                        createSoldItemCollection(currentUser, soldItemName, soldItemDesc, soldItemCost, soldItemZipcode);
-                        getSnapshots().getSnapshot(pos).getReference().delete();
-
+                                        createSoldItemCollection(currentUser, soldItemName, soldItemDesc, soldItemCost, soldItemZipcode);
+                                        getSnapshots().getSnapshot(pos).getReference().delete();
+                                        dialogInterface.dismiss();
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                }).create();
+                        dialog.show();
                     }
                 });
             }
@@ -161,9 +179,9 @@ public class SellerMode extends AppCompatActivity {
                     salesMap.put("description", desc);
                     salesMap.put("cost", cost);
                     salesMap.put("zipcode", zipcode);
-                    salesMap.put("Sold On", date);
+                    salesMap.put("date", date);
 
-                    db.collection("Sold Items").document(currentUser).collection("User's Sold Items").document(name)
+                    db.collection("Sold Items").document(currentUser).collection("User's Sold Items").document()
                             .set(salesMap).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     Toast.makeText(SellerMode.this, "Item Marked As Sold", Toast.LENGTH_LONG).show();

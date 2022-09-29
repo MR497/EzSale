@@ -14,9 +14,13 @@
         android:theme="@style/Theme.EzSale"
         tools:targetApi="31">
         <activity
-            android:name=".EditSaleActivity"
+            android:name=".SoldItemsActivity"
             android:exported="false"
             android:parentActivityName=".SellerMode"/>
+        <activity
+            android:name=".EditSaleActivity"
+            android:exported="false"
+            android:parentActivityName=".SellerMode" />
         <activity
             android:name=".CreateSaleActivity"
             android:exported="false" />

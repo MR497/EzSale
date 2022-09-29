@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/seller_mode_welcome"
-        android:layout_width="284dp"
-        android:layout_height="84dp"
+        android:layout_width="283dp"
+        android:layout_height="71dp"
         android:text="@string/seller_mode"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.024" />
 
     <Button
         android:id="@+id/seller_mode_sell_button"
@@ -28,10 +28,9 @@
         android:text="Sell New Item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.272" />
+        app:layout_constraintVertical_bias="0.302" />
 
     <TextView
         android:id="@+id/active_sales_listing"
@@ -57,4 +56,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.878" />
+
+    <Button
+        android:id="@+id/see_sold_items_button"
+        android:layout_width="151dp"
+        android:layout_height="66dp"
+        android:text="See Sold Items"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.169" />
 </androidx.constraintlayout.widget.ConstraintLayout>
