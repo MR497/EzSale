@@ -17,7 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CardElements"
             android:layout_width="391dp"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:background="#BF00FA8E">
 
             <TextView
                 android:id="@+id/item_placeholder"

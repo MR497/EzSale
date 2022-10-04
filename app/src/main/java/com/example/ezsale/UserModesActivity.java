@@ -44,6 +44,9 @@ public class UserModesActivity extends AppCompatActivity {
         Button sellButton = findViewById(R.id.user_mode_sell_button);
         sellButton.setOnClickListener(view -> startActivity(new Intent(UserModesActivity.this, SellerMode.class)));
 
+        Button buyButton = findViewById(R.id.user_mode_buy_button);
+        buyButton.setOnClickListener(view -> startActivity(new Intent(UserModesActivity.this, BuyerModeActivity.class)));
+
     }
 
     private void getUserData(String userId) {
