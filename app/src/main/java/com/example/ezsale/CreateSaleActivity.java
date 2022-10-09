@@ -58,6 +58,11 @@ public class CreateSaleActivity extends AppCompatActivity {
                     Log.d("userInformation", "DocumentSnapshot data: " + document.getData());
                     String userName = (String) Objects.requireNonNull(document.getData()).get("userName");
 
+                    HashMap<String, String> userInfo = new HashMap<>();
+                    userInfo.put("userName", userName);
+
+                    db.collection("Items Being Sold").document(currentUser).set(userInfo);
+
                     HashMap<String, String> salesMap = new HashMap<>();
                     salesMap.put("author", userName);
                     salesMap.put("name", itemName);
