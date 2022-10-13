@@ -16,7 +16,8 @@
         <activity
             android:name=".BuyerModeActivity"
             android:exported="false"
-            android:parentActivityName=".UserModesActivity" />
+            android:parentActivityName=".UserModesActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".SoldItemsActivity"
             android:exported="false"

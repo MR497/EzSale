@@ -6,7 +6,7 @@ public class BuyerListingsModel {
 
     private BuyerListingsModel() {}
 
-    private BuyerListingsModel(String author, String cost, String description, String name, String zipcode) {
+    BuyerListingsModel(String author, String cost, String description, String name, String zipcode) {
         this.author = author;
         this.cost = cost;
         this.description = description;

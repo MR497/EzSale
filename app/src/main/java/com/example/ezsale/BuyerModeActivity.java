@@ -1,26 +1,46 @@
 package com.example.ezsale;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-
+import com.google.firebase.firestore.QuerySnapshot;
+import android.widget.Filter;
+import android.widget.Filterable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class BuyerModeActivity extends AppCompatActivity {
@@ -28,7 +48,6 @@ public class BuyerModeActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private RecyclerView buyerItemsList;
     private FirestoreRecyclerAdapter adapter;
-    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +66,16 @@ public class BuyerModeActivity extends AppCompatActivity {
                 DocumentSnapshot document = task.getResult();
                 if(document.exists()) {
                     Log.d("userInformation", "DocumentSnapshot data: " + document.getData());
-                    userName = (String) Objects.requireNonNull(document.getData()).get("userName");
-                    setUpRecyclerView();
+                    String userName = (String) Objects.requireNonNull(document.getData()).get("userName");
+                    ImageButton searchButton = findViewById(R.id.searchButton);
+                    searchButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String searchInput = ((EditText)findViewById(R.id.buyer_search_bar)).getText().toString();
+                            setUpRecyclerView(userName, searchInput);
+                        }
+                    });
+                    //setUpRecyclerView(userName);
                 }
                 else {
                     Log.d("userInformation", "No such document");
@@ -60,8 +87,8 @@ public class BuyerModeActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpRecyclerView(){
-        Query query = db.collectionGroup("User's Listings").whereNotEqualTo("author", userName);
+    private void setUpRecyclerView(String userName,String searchInput){
+        Query query = db.collectionGroup("User's Listings").whereNotEqualTo("author", userName).whereEqualTo("zipcode", searchInput);
         FirestoreRecyclerOptions<BuyerListingsModel> options = new FirestoreRecyclerOptions.Builder<BuyerListingsModel>()
                 .setQuery(query, BuyerListingsModel.class)
                 .build();
@@ -103,7 +130,6 @@ public class BuyerModeActivity extends AppCompatActivity {
             contactSeller = itemView.findViewById(R.id.contact_seller_button);
         }
     }
-
     @Override
     protected void onStop() {
         super.onStop();
