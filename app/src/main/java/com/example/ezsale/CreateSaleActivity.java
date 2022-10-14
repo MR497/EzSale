@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 
 public class CreateSaleActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class CreateSaleActivity extends AppCompatActivity {
             String itemName = ((EditText)findViewById(R.id.item_name_text)).getText().toString();
             String itemDesc = ((EditText)findViewById(R.id.item_description_text)).getText().toString();
             String itemCost = ((EditText)findViewById(R.id.item_cost_text)).getText().toString();
-            String zipcode = ((EditText)findViewById(R.id.zipcode_text)).getText().toString();
+            String zipcode = ((EditText)findViewById(R.id.zipcode_text)).getText().toString().toUpperCase();
 
             if(TextUtils.isEmpty(itemName) || TextUtils.isEmpty(itemDesc) || TextUtils.isEmpty(itemCost)
                     || TextUtils.isEmpty(zipcode)) {

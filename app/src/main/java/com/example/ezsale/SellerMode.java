@@ -85,6 +85,7 @@ public class SellerMode extends AppCompatActivity {
                                         getSnapshots().getSnapshot(pos).getReference().delete();
                                         Toast.makeText(SellerMode.this, "Item Listing Deleted", Toast.LENGTH_LONG).show();
                                         dialogInterface.dismiss();
+                                        startActivity(getIntent());
                                     }
                                 })
                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -109,10 +110,10 @@ public class SellerMode extends AppCompatActivity {
                                         String soldItemDesc = (String) getSnapshots().getSnapshot(pos).getData().get("description");
                                         String soldItemCost = (String) getSnapshots().getSnapshot(pos).getData().get("cost");
                                         String soldItemZipcode = (String) getSnapshots().getSnapshot(pos).getData().get("zipcode");
-
                                         createSoldItemCollection(currentUser, soldItemName, soldItemDesc, soldItemCost, soldItemZipcode);
                                         getSnapshots().getSnapshot(pos).getReference().delete();
                                         dialogInterface.dismiss();
+                                        startActivity(getIntent());
                                     }
                                 })
                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

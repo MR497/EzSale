@@ -41,7 +41,7 @@
         android:layout_marginStart="60dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Enter your location"
+        android:hint="City, State"
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/buyer_listings"
         app:layout_constraintStart_toStartOf="parent"

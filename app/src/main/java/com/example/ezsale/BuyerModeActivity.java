@@ -71,7 +71,7 @@ public class BuyerModeActivity extends AppCompatActivity {
                     searchButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String searchInput = ((EditText)findViewById(R.id.buyer_search_bar)).getText().toString();
+                            String searchInput = ((EditText)findViewById(R.id.buyer_search_bar)).getText().toString().toUpperCase();
                             setUpRecyclerView(userName, searchInput);
                         }
                     });
@@ -89,6 +89,7 @@ public class BuyerModeActivity extends AppCompatActivity {
 
     private void setUpRecyclerView(String userName,String searchInput){
         Query query = db.collectionGroup("User's Listings").whereNotEqualTo("author", userName).whereEqualTo("zipcode", searchInput);
+
         FirestoreRecyclerOptions<BuyerListingsModel> options = new FirestoreRecyclerOptions.Builder<BuyerListingsModel>()
                 .setQuery(query, BuyerListingsModel.class)
                 .build();
@@ -130,14 +131,15 @@ public class BuyerModeActivity extends AppCompatActivity {
             contactSeller = itemView.findViewById(R.id.contact_seller_button);
         }
     }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
     }
+
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        adapter.stopListening();
+//    }
 }

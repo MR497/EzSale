@@ -100,12 +100,12 @@
 
             <TextView
                 android:id="@+id/zip_placeholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#####"
+                android:layout_width="147dp"
+                android:layout_height="19dp"
+                android:text="city, state"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.221"
+                app:layout_constraintHorizontal_bias="0.327"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.453"
