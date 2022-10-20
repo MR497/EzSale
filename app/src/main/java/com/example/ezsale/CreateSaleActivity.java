@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +33,21 @@ public class CreateSaleActivity extends AppCompatActivity {
 
         db =  FirebaseFirestore.getInstance();
 
+        Spinner stateList = (Spinner) findViewById(R.id.create_sale_state_spinner);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(CreateSaleActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.states));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateList.setAdapter(myAdapter);
+
         Button postSaleButton = findViewById(R.id.post_sale_button);
         postSaleButton.setOnClickListener(view -> {
             String itemName = ((EditText)findViewById(R.id.item_name_text)).getText().toString();
             String itemDesc = ((EditText)findViewById(R.id.item_description_text)).getText().toString();
             String itemCost = ((EditText)findViewById(R.id.item_cost_text)).getText().toString();
-            String zipcode = ((EditText)findViewById(R.id.zipcode_text)).getText().toString().toUpperCase();
+            String city = ((EditText)findViewById(R.id.zipcode_text)).getText().toString().toUpperCase();
+            String state = stateList.getSelectedItem().toString();
+
+            String zipcode = city+", "+state;
 
             if(TextUtils.isEmpty(itemName) || TextUtils.isEmpty(itemDesc) || TextUtils.isEmpty(itemCost)
                     || TextUtils.isEmpty(zipcode)) {

@@ -17,9 +17,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -59,6 +61,12 @@ public class BuyerModeActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         buyerItemsList = findViewById(R.id.buyer_listings);
 
+        Spinner stateList = (Spinner) findViewById(R.id.buyer_list_spinner);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(BuyerModeActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.states));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        stateList.setAdapter(myAdapter);
+
         String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         DocumentReference docRef = db.collection("users").document(currentUser);
         docRef.get().addOnCompleteListener(task -> {
@@ -71,7 +79,9 @@ public class BuyerModeActivity extends AppCompatActivity {
                     searchButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String searchInput = ((EditText)findViewById(R.id.buyer_search_bar)).getText().toString().toUpperCase();
+                            String city = ((EditText)findViewById(R.id.buyer_search_bar)).getText().toString().toUpperCase();
+                            String state = stateList.getSelectedItem().toString();
+                            String searchInput = city+", "+state;
                             setUpRecyclerView(userName, searchInput);
                         }
                     });
@@ -109,6 +119,7 @@ public class BuyerModeActivity extends AppCompatActivity {
                 holder.itemCost.setText(model.getCost());
                 holder.zipcode.setText(model.getZipcode());
             }
+
         };
         buyerItemsList.setHasFixedSize(true);
         buyerItemsList.setLayoutManager(new LinearLayoutManager(this));
