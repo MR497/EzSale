@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -118,6 +119,15 @@ public class BuyerModeActivity extends AppCompatActivity {
                 holder.itemDesc.setText(model.getDescription());
                 holder.itemCost.setText(model.getCost());
                 holder.zipcode.setText(model.getZipcode());
+                holder.contactSeller.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String email = model.getEmail();
+                        Intent i = new Intent(BuyerModeActivity.this, SendEmailActivity.class);
+                        i.putExtra("emailAddress", email);
+                        startActivity(i);
+                    }
+                });
             }
 
         };
