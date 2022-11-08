@@ -15,6 +15,7 @@
         tools:targetApi="31">
         <activity
             android:name=".SendEmailActivity"
+            android:parentActivityName=".BuyerModeActivity"
             android:exported="false" />
         <activity
             android:name=".BuyerModeActivity"
