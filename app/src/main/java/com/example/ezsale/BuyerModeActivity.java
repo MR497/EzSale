@@ -122,9 +122,19 @@ public class BuyerModeActivity extends AppCompatActivity {
                 holder.contactSeller.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        String sellerName = model.getAuthor();
                         String email = model.getEmail();
+                        String itemNameEmail = model.getName();
+                        String itemDescEmail = model.getDescription();
+                        String itemCostEmail = model.getCost();
+                        String itemLocationEmail = model.getZipcode();
                         Intent i = new Intent(BuyerModeActivity.this, SendEmailActivity.class);
+                        i.putExtra("sellerName", sellerName);
                         i.putExtra("emailAddress", email);
+                        i.putExtra("itemName", itemNameEmail);
+                        i.putExtra("itemDesc", itemDescEmail);
+                        i.putExtra("itemCost", itemCostEmail);
+                        i.putExtra("itemLocation", itemLocationEmail);
                         startActivity(i);
                     }
                 });
