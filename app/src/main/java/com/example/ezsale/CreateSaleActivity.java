@@ -1,14 +1,27 @@
 package com.example.ezsale;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -25,6 +40,7 @@ import java.util.Objects;
 public class CreateSaleActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +54,14 @@ public class CreateSaleActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.states));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateList.setAdapter(myAdapter);
+
+        Button uploadPic = findViewById(R.id.upload_pic_btn);
+        uploadPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
 
         Button postSaleButton = findViewById(R.id.post_sale_button);
         postSaleButton.setOnClickListener(view -> {
@@ -59,6 +83,51 @@ public class CreateSaleActivity extends AppCompatActivity {
         });
     }
 
+    private void selectImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        GalleryActivityResultLauncher.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> GalleryActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        imageUri = Objects.requireNonNull(result.getData()).getData();
+                        ImageView image = findViewById(R.id.item_picture);
+                        image.setImageURI(imageUri);
+                        uploadImage();
+                    }
+                }
+            });
+
+    private String getFileExtension (Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private void uploadImage() {
+        String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Submitting");
+        pd.show();
+
+        if(imageUri != null) {
+            final StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("uploads/itemPics/" + currentUser + "/")
+                    .child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+
+            fileRef.putFile(imageUri).addOnCompleteListener(task -> fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                String url = uri.toString();
+                Log.d("DownloadURL", url);
+                pd.dismiss();
+            }));
+        }
+    }
+
     private void createSale(String itemName, String itemDesc, String itemCost, String zipcode) {
         String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
@@ -73,7 +142,6 @@ public class CreateSaleActivity extends AppCompatActivity {
 
                     HashMap<String, String> userInfo = new HashMap<>();
                     userInfo.put("userName", userName);
-
                     db.collection("Items Being Sold").document(currentUser).set(userInfo);
 
                     HashMap<String, String> salesMap = new HashMap<>();
@@ -83,7 +151,6 @@ public class CreateSaleActivity extends AppCompatActivity {
                     salesMap.put("description", itemDesc);
                     salesMap.put("cost", itemCost);
                     salesMap.put("zipcode", zipcode);
-
                     db.collection("Items Being Sold").document(currentUser).collection("User's Listings").document()
                             .set(salesMap).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
