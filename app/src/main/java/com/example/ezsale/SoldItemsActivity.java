@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -16,6 +17,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Picasso;
+
 import java.util.Objects;
 
 public class SoldItemsActivity extends AppCompatActivity {
@@ -55,7 +58,8 @@ public class SoldItemsActivity extends AppCompatActivity {
                 holder.soldItemCost.setText(model.getCost());
                 holder.soldItemZipcode.setText(model.getZipcode());
                 holder.soldItemDate.setText(model.getDate());
-
+                String pictureURL = model.getPicture();
+                Picasso.get().load(pictureURL).into(holder.soldItemImage);
             }
         };
 
@@ -67,6 +71,7 @@ public class SoldItemsActivity extends AppCompatActivity {
     private class SoldItemsViewHolder extends RecyclerView.ViewHolder {
 
         private TextView soldItemName, soldItemDesc, soldItemCost, soldItemZipcode, soldItemDate;
+        private ImageView soldItemImage;
 
         public SoldItemsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +80,7 @@ public class SoldItemsActivity extends AppCompatActivity {
             soldItemCost = itemView.findViewById(R.id.sold_item_amount_placeholder);
             soldItemZipcode = itemView.findViewById(R.id.sold_item_zipcode_placeholder);
             soldItemDate = itemView.findViewById(R.id.sold_item_date_placeholder);
+            soldItemImage = itemView.findViewById(R.id.sold_item_list_image);
         }
     }
 

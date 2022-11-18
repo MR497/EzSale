@@ -41,6 +41,7 @@ public class CreateSaleActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private Uri imageUri;
+    //private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,23 @@ public class CreateSaleActivity extends AppCompatActivity {
                 Toast.makeText(CreateSaleActivity.this, "Form is incomplete!", Toast.LENGTH_LONG).show();
             }
             else {
-                createSale(itemName, itemDesc, itemCost, zipcode);
+                String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                final ProgressDialog pd = new ProgressDialog(this);
+                pd.setMessage("Putting Item Up For Sale...");
+                pd.show();
+
+                if(imageUri != null) {
+                    final StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("uploads/itemPics/" + currentUser + "/")
+                            .child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+
+                    fileRef.putFile(imageUri).addOnCompleteListener(task -> fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String url = uri.toString();
+                        createSale(itemName, itemDesc, itemCost, zipcode, url);
+                        Log.d("DownloadURL", url);
+                        pd.dismiss();
+                    }));
+                }
+                //createSale(itemName, itemDesc, itemCost, zipcode);
             }
         });
     }
@@ -99,7 +116,7 @@ public class CreateSaleActivity extends AppCompatActivity {
                         imageUri = Objects.requireNonNull(result.getData()).getData();
                         ImageView image = findViewById(R.id.item_picture);
                         image.setImageURI(imageUri);
-                        uploadImage();
+                        //uploadImage();
                     }
                 }
             });
@@ -110,25 +127,25 @@ public class CreateSaleActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void uploadImage() {
-        String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Submitting");
-        pd.show();
+//    private void uploadImage() {
+//        String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+//        final ProgressDialog pd = new ProgressDialog(this);
+//        pd.setMessage("Uploading Picture...");
+//        pd.show();
+//
+//        if(imageUri != null) {
+//            final StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("uploads/itemPics/" + currentUser + "/")
+//                    .child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+//
+//            fileRef.putFile(imageUri).addOnCompleteListener(task -> fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
+//                String url = uri.toString();
+//                Log.d("DownloadURL", url);
+//                pd.dismiss();
+//            }));
+//        }
+//    }
 
-        if(imageUri != null) {
-            final StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("uploads/itemPics/" + currentUser + "/")
-                    .child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-
-            fileRef.putFile(imageUri).addOnCompleteListener(task -> fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                String url = uri.toString();
-                Log.d("DownloadURL", url);
-                pd.dismiss();
-            }));
-        }
-    }
-
-    private void createSale(String itemName, String itemDesc, String itemCost, String zipcode) {
+    private void createSale(String itemName, String itemDesc, String itemCost, String zipcode, String url) {
         String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
         DocumentReference docRef = db.collection("users").document(currentUser);
@@ -151,6 +168,7 @@ public class CreateSaleActivity extends AppCompatActivity {
                     salesMap.put("description", itemDesc);
                     salesMap.put("cost", itemCost);
                     salesMap.put("zipcode", zipcode);
+                    salesMap.put("picture", url);
                     db.collection("Items Being Sold").document(currentUser).collection("User's Listings").document()
                             .set(salesMap).addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {

@@ -12,6 +12,7 @@
     <string name="amount_s">Amount: $%s</string>
 
     <string-array name="states">
+        <item>State</item>
         <item>AL</item>
         <item>AK</item>
         <item>AZ</item>

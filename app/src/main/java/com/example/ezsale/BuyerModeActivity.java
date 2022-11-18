@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
+
 import android.widget.Filter;
 import android.widget.Filterable;
 import java.util.ArrayList;
@@ -119,6 +122,8 @@ public class BuyerModeActivity extends AppCompatActivity {
                 holder.itemDesc.setText(model.getDescription());
                 holder.itemCost.setText(model.getCost());
                 holder.zipcode.setText(model.getZipcode());
+                String pictureURL = model.getPicture();
+                Picasso.get().load(pictureURL).into(holder.image);
                 holder.contactSeller.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -151,6 +156,7 @@ public class BuyerModeActivity extends AppCompatActivity {
 
         private TextView sellerName, itemName, itemDesc, itemCost, zipcode;
         private Button contactSeller;
+        private ImageView image;
 
         public BuyerItemsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -160,6 +166,7 @@ public class BuyerModeActivity extends AppCompatActivity {
             itemCost = itemView.findViewById(R.id.buyer_amount_placeholder);
             zipcode = itemView.findViewById(R.id.buyer_zip_placeholder);
             contactSeller = itemView.findViewById(R.id.contact_seller_button);
+            image = itemView.findViewById(R.id.buyer_listing_image);
         }
     }
 

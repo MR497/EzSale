@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CardElements"
             android:layout_width="391dp"
-            android:layout_height="240dp"
+            android:layout_height="314dp"
             android:background="#8C9EFF">
 
             <TextView
@@ -30,10 +30,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.056"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.049" />
+                app:layout_constraintVertical_bias="0.032" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -46,19 +46,19 @@
                 app:layout_constraintHorizontal_bias="0.051"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.64" />
+                app:layout_constraintVertical_bias="0.501" />
 
             <TextView
                 android:id="@+id/buyer_description_placeholder"
-                android:layout_width="182dp"
-                android:layout_height="79dp"
+                android:layout_width="169dp"
+                android:layout_height="80dp"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.449"
+                app:layout_constraintHorizontal_bias="0.076"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.875" />
+                app:layout_constraintVertical_bias="0.709" />
 
             <TextView
                 android:id="@+id/amount_text"
@@ -68,10 +68,10 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.048"
+                app:layout_constraintHorizontal_bias="0.051"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.343" />
+                app:layout_constraintVertical_bias="0.274" />
 
             <TextView
                 android:id="@+id/buyer_amount_placeholder"
@@ -80,10 +80,10 @@
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.262"
+                app:layout_constraintHorizontal_bias="0.265"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.34" />
+                app:layout_constraintVertical_bias="0.275" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -93,10 +93,10 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.048"
+                app:layout_constraintHorizontal_bias="0.051"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.453" />
+                app:layout_constraintVertical_bias="0.386" />
 
             <TextView
                 android:id="@+id/buyer_zip_placeholder"
@@ -105,10 +105,10 @@
                 android:text="city, state"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.327"
+                app:layout_constraintHorizontal_bias="0.331"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.452"
+                app:layout_constraintVertical_bias="0.386"
                 tools:ignore="TextContrastCheck" />
 
             <Button
@@ -118,23 +118,23 @@
                 android:text="Contact Seller"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.953"
+                app:layout_constraintHorizontal_bias="0.942"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.312" />
+                app:layout_constraintVertical_bias="0.096" />
 
             <TextView
                 android:id="@+id/buyer_author_text"
                 android:layout_width="43dp"
                 android:layout_height="21dp"
-                android:textColor="@color/black"
                 android:text="Seller: "
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.048"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.221" />
+                app:layout_constraintVertical_bias="0.146" />
 
             <TextView
                 android:id="@+id/seller_name_placeholder"
@@ -146,7 +146,19 @@
                 app:layout_constraintHorizontal_bias="0.207"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.219" />
+                app:layout_constraintVertical_bias="0.146" />
+
+            <ImageView
+                android:id="@+id/buyer_listing_image"
+                android:layout_width="183dp"
+                android:layout_height="139dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.971"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.84"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -2,11 +2,12 @@ package com.example.ezsale;
 
 public class BuyerListingsModel {
 
-    private String email, author, cost, description, name, zipcode;
+    private String email, author, cost, description, name, zipcode, picture;
 
     private BuyerListingsModel() {}
 
-    BuyerListingsModel(String email, String author, String cost, String description, String name, String zipcode) {
+    BuyerListingsModel(String email, String author, String cost, String description, String name, String zipcode, String picture) {
+        this.picture = picture;
         this.email = email;
         this.author = author;
         this.cost = cost;
@@ -50,5 +51,11 @@ public class BuyerListingsModel {
     }
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+    public String getPicture() {
+        return picture;
+    }
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

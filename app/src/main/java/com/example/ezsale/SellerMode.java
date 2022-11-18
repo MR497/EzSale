@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -72,6 +74,8 @@ public class SellerMode extends AppCompatActivity {
                 holder.itemDesc.setText(model.getDescription());
                 holder.itemCost.setText(model.getCost());
                 holder.zipcode.setText(model.getZipcode());
+                String pictureURL = model.getPicture();
+                Picasso.get().load(pictureURL).into(holder.image);
                 int pos = holder.getAbsoluteAdapterPosition();
                 holder.deletePost.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -110,7 +114,8 @@ public class SellerMode extends AppCompatActivity {
                                         String soldItemDesc = (String) getSnapshots().getSnapshot(pos).getData().get("description");
                                         String soldItemCost = (String) getSnapshots().getSnapshot(pos).getData().get("cost");
                                         String soldItemZipcode = (String) getSnapshots().getSnapshot(pos).getData().get("zipcode");
-                                        createSoldItemCollection(currentUser, soldItemName, soldItemDesc, soldItemCost, soldItemZipcode);
+                                        String soldItemPicture = (String) getSnapshots().getSnapshot(pos).getData().get("picture");
+                                        createSoldItemCollection(currentUser, soldItemName, soldItemDesc, soldItemCost, soldItemZipcode, soldItemPicture);
                                         getSnapshots().getSnapshot(pos).getReference().delete();
                                         dialogInterface.dismiss();
                                         startActivity(getIntent());
@@ -137,6 +142,7 @@ public class SellerMode extends AppCompatActivity {
 
         private TextView itemName, itemDesc, itemCost, zipcode;
         private Button deletePost, soldPost;
+        private ImageView image;
 
         public SellerListingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -146,6 +152,7 @@ public class SellerMode extends AppCompatActivity {
             zipcode = itemView.findViewById(R.id.zip_placeholder);
             deletePost = itemView.findViewById(R.id.delete_post_button);
             soldPost = itemView.findViewById(R.id.sold_post_button);
+            image = itemView.findViewById(R.id.sellerView_list_image);
         }
     }
 
@@ -161,7 +168,7 @@ public class SellerMode extends AppCompatActivity {
         adapter.startListening();
     }
 
-    private void createSoldItemCollection (String currentUser, String name, String desc, String cost, String zipcode){
+    private void createSoldItemCollection (String currentUser, String name, String desc, String cost, String zipcode, String picture){
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String date = dateFormat.format(cal.getTime());
@@ -181,6 +188,7 @@ public class SellerMode extends AppCompatActivity {
                     salesMap.put("cost", cost);
                     salesMap.put("zipcode", zipcode);
                     salesMap.put("date", date);
+                    salesMap.put("picture", picture);
 
                     db.collection("Sold Items").document(currentUser).collection("User's Sold Items").document()
                             .set(salesMap).addOnCompleteListener(task1 -> {

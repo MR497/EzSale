@@ -1,12 +1,16 @@
 package com.example.ezsale;
 
+import android.net.Uri;
+
 public class SellerListingsModel {
 
-    private String author, cost, description, name, zipcode;
+    private String author, cost, description, name, zipcode, picture;
+
 
     private SellerListingsModel() {}
 
-    private SellerListingsModel(String author, String cost, String description, String name, String zipcode) {
+    private SellerListingsModel(String author, String cost, String description, String name, String zipcode, String picture) {
+        this.picture = picture;
         this.author = author;
         this.cost = cost;
         this.description = description;
@@ -43,5 +47,11 @@ public class SellerListingsModel {
     }
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+    public String getPicture() {
+        return picture;
+    }
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }
