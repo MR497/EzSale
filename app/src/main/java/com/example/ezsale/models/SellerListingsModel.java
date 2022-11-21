@@ -1,14 +1,16 @@
-package com.example.ezsale;
+package com.example.ezsale.models;
 
-public class SoldListingsModel {
+import android.net.Uri;
 
-    private String date, author, cost, description, name, zipcode, picture;
+public class SellerListingsModel {
 
-    private SoldListingsModel() {}
+    private String author, cost, description, name, zipcode, picture;
 
-    private SoldListingsModel(String date, String author, String cost, String description, String name, String zipcode, String picture) {
+
+    private SellerListingsModel() {}
+
+    private SellerListingsModel(String author, String cost, String description, String name, String zipcode, String picture) {
         this.picture = picture;
-        this.date = date;
         this.author = author;
         this.cost = cost;
         this.description = description;
@@ -16,12 +18,6 @@ public class SoldListingsModel {
         this.zipcode = zipcode;
     }
 
-    public String getDate() {
-        return date;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
     public String getAuthor() {
         return author;
     }

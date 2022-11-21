@@ -14,37 +14,37 @@
         android:theme="@style/Theme.EzSale"
         tools:targetApi="31">
         <activity
-            android:name=".SendEmailActivity"
-            android:parentActivityName=".BuyerModeActivity"
+            android:name=".buyer.SendEmailActivity"
+            android:parentActivityName=".buyer.BuyerModeActivity"
             android:exported="false" />
         <activity
-            android:name=".BuyerModeActivity"
+            android:name=".buyer.BuyerModeActivity"
             android:exported="false"
-            android:parentActivityName=".UserModesActivity"
+            android:parentActivityName=".generaluser.UserModesActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".SoldItemsActivity"
+            android:name=".seller.SoldItemsActivity"
             android:exported="false"
-            android:parentActivityName=".SellerMode" />
+            android:parentActivityName=".seller.SellerMode" />
         <activity
-            android:name=".EditSaleActivity"
+            android:name=".seller.EditSaleActivity"
             android:exported="false"
-            android:parentActivityName=".SellerMode" />
+            android:parentActivityName=".seller.SellerMode" />
         <activity
-            android:name=".CreateSaleActivity"
+            android:name=".seller.CreateSaleActivity"
             android:exported="false" />
         <activity
-            android:name=".SellerMode"
+            android:name=".seller.SellerMode"
             android:exported="false"
-            android:parentActivityName=".UserModesActivity" />
+            android:parentActivityName=".generaluser.UserModesActivity" />
         <activity
-            android:name=".UserModesActivity"
+            android:name=".generaluser.UserModesActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".generaluser.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".generaluser.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

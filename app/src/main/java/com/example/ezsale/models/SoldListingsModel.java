@@ -1,14 +1,14 @@
-package com.example.ezsale;
+package com.example.ezsale.models;
 
-public class BuyerListingsModel {
+public class SoldListingsModel {
 
-    private String email, author, cost, description, name, zipcode, picture;
+    private String date, author, cost, description, name, zipcode, picture;
 
-    private BuyerListingsModel() {}
+    private SoldListingsModel() {}
 
-    BuyerListingsModel(String email, String author, String cost, String description, String name, String zipcode, String picture) {
+    private SoldListingsModel(String date, String author, String cost, String description, String name, String zipcode, String picture) {
         this.picture = picture;
-        this.email = email;
+        this.date = date;
         this.author = author;
         this.cost = cost;
         this.description = description;
@@ -16,11 +16,11 @@ public class BuyerListingsModel {
         this.zipcode = zipcode;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDate() {
+        return date;
     }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDate(String date) {
+        this.date = date;
     }
     public String getAuthor() {
         return author;

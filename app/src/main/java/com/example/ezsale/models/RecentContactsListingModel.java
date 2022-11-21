@@ -1,4 +1,4 @@
-package com.example.ezsale;
+package com.example.ezsale.models;
 
 public class RecentContactsListingModel {
 

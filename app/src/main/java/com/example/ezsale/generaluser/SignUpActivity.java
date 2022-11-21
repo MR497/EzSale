@@ -1,4 +1,4 @@
-package com.example.ezsale;
+package com.example.ezsale.generaluser;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.ezsale.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
