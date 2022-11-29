@@ -45,6 +45,8 @@ public class CreateSaleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_sale);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         db =  FirebaseFirestore.getInstance();
 
         Spinner stateList = (Spinner) findViewById(R.id.create_sale_state_spinner);

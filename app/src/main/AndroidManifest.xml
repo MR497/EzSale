@@ -32,7 +32,8 @@
             android:parentActivityName=".seller.SellerMode" />
         <activity
             android:name=".seller.CreateSaleActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".seller.SellerMode"/>
         <activity
             android:name=".seller.SellerMode"
             android:exported="false"
