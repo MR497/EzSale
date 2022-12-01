@@ -35,6 +35,7 @@ public class SoldItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sold_items);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Sold Items");
 
         String currentUser = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         db = FirebaseFirestore.getInstance();

@@ -44,6 +44,7 @@ public class BuyerModeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_buyer_mode);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Buyer");
 
         db = FirebaseFirestore.getInstance();
         buyerItemsList = findViewById(R.id.buyer_listings);

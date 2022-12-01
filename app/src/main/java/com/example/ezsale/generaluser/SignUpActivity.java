@@ -28,6 +28,9 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Create New Account");
+
         auth = FirebaseAuth.getInstance();
         //db = FirebaseFirestore.getInstance();
 

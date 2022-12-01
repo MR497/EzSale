@@ -46,6 +46,7 @@ public class CreateSaleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_sale);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Sell New Item");
 
         db =  FirebaseFirestore.getInstance();
 

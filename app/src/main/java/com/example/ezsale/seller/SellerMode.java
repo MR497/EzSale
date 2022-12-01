@@ -46,6 +46,7 @@ public class SellerMode extends AppCompatActivity {
         setContentView(R.layout.activity_seller_mode);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Seller");
 
         Button seeSoldItems = findViewById(R.id.see_sold_items_button);
         seeSoldItems.setOnClickListener(view -> startActivity(new Intent(SellerMode.this, SoldItemsActivity.class)));

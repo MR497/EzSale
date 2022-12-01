@@ -43,6 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".generaluser.SignUpActivity"
+            android:parentActivityName=".generaluser.MainActivity"
             android:exported="false" />
         <activity
             android:name=".generaluser.MainActivity"

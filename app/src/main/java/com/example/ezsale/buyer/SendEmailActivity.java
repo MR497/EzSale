@@ -34,6 +34,8 @@ public class SendEmailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_email);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Contact Seller");
+
         db = FirebaseFirestore.getInstance();
 
         emailAddress = findViewById(R.id.email_address_input);
