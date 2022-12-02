@@ -14,9 +14,19 @@
         android:theme="@style/Theme.EzSale"
         tools:targetApi="31">
         <activity
+            android:name=".generaluser.SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".buyer.SendEmailActivity"
-            android:parentActivityName=".buyer.BuyerModeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".buyer.BuyerModeActivity" />
         <activity
             android:name=".buyer.BuyerModeActivity"
             android:exported="false"
@@ -33,7 +43,7 @@
         <activity
             android:name=".seller.CreateSaleActivity"
             android:exported="false"
-            android:parentActivityName=".seller.SellerMode"/>
+            android:parentActivityName=".seller.SellerMode" />
         <activity
             android:name=".seller.SellerMode"
             android:exported="false"
@@ -43,16 +53,11 @@
             android:exported="false" />
         <activity
             android:name=".generaluser.SignUpActivity"
-            android:parentActivityName=".generaluser.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".generaluser.MainActivity" />
         <activity
             android:name=".generaluser.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
