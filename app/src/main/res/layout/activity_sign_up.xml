@@ -69,10 +69,11 @@
 
     <Button
         android:id="@+id/register_submit"
-        android:layout_width="109dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="155dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"
         android:text="Create Account"
+        android:backgroundTint="#BC3E3E"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_password" />
