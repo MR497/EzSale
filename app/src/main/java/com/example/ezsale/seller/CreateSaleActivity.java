@@ -75,7 +75,7 @@ public class CreateSaleActivity extends AppCompatActivity {
             String zipcode = city+", "+state;
 
             if(TextUtils.isEmpty(itemName) || TextUtils.isEmpty(itemDesc) || TextUtils.isEmpty(itemCost)
-                    || TextUtils.isEmpty(zipcode)) {
+                    || TextUtils.isEmpty(city)) {
                 Toast.makeText(CreateSaleActivity.this, "Form is incomplete!", Toast.LENGTH_LONG).show();
             }
             else {
